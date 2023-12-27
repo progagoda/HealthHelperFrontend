@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { DatePicker } from 'antd';
+import { DatePicker, Flex } from 'antd';
+import { useTelegram } from './hooks/useTelegram';
 
 function App() {
-  return <DatePicker />;
+  const { tg } = useTelegram();
+
+  useEffect(() => {
+    tg.ready();
+  }, []);
+  return (
+    <Flex justify={'center'}>
+      <DatePicker />
+    </Flex>
+  );
 }
 
 export default App;
