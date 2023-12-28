@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { WebAppProvider } from '@vkruglikov/react-telegram-web-app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
-root.render(
-  <WebAppProvider>
-    <App />
-  </WebAppProvider>,
-);
+const AppWrapper = () => {
+  const [smoothButtonsTransition, setSmoothButtonsTransition] = useState(false);
+
+  return (
+    <WebAppProvider options={{ smoothButtonsTransition }}>
+      <App
+        onChangeTransition={() => setSmoothButtonsTransition((state) => !state)}
+      />
+    </WebAppProvider>
+  );
+};
+root.render(<AppWrapper />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
