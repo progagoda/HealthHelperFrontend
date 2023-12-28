@@ -1,6 +1,6 @@
 import React, { DispatchWithoutAction, FC, useEffect } from 'react';
 import './App.css';
-import { Card, Col, ConfigProvider, Row, Space, theme } from 'antd';
+import { Card, ConfigProvider, Row, Space, theme } from 'antd';
 import { useTelegram } from './hooks/useTelegram';
 import { PlusOutlined } from '@ant-design/icons';
 import Meta from 'antd/es/card/Meta';
@@ -10,6 +10,7 @@ export const App: FC<{
   onChangeTransition: DispatchWithoutAction;
 }> = ({ onChangeTransition }) => {
   const { tg } = useTelegram();
+  console.log(onChangeTransition);
   const [colorScheme, themeParams] = useThemeParams();
   type TDictionaryAnalyse = {
     id: number;
