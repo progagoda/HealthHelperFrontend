@@ -1,20 +1,25 @@
-import { TDictionaryAnalyse } from './types';
+import { TAnalyse } from './types';
 
-export const ANALYZES: TDictionaryAnalyse[] = [
+export const ANALYZES: TAnalyse[] = [
   {
     id: 1,
     name: 'Билирубин',
   },
   {
     id: 2,
-    name: 'Билирубин',
+    name: 'Железо',
   },
   {
     id: 3,
-    name: 'Билирубин',
+    name: 'Цинк',
   },
   {
     id: 4,
-    name: 'Билирубин',
+    name: 'Магний',
   },
 ];
+export const ANALYZE: TAnalyse = {
+  id: 1,
+  name: 'Билирубин',
+  value: 0,
+};

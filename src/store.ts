@@ -1,9 +1,11 @@
-import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit';
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 import { TAnalyse, TAnalysesState } from './types';
+import { ANALYZE } from './constants';
 
 const initialState: TAnalysesState = {
   selectedAnalyses: [],
+  selectedAnalyse: ANALYZE,
 };
 
 const analysesSlice = createSlice({
@@ -22,12 +24,19 @@ const analysesSlice = createSlice({
         (analyse) => analyse.id === deleteAnalyse.id,
       );
     },
+    setCurrentAnalyse: (
+      state,
+      { payload: currentAnalyse }: PayloadAction<TAnalyse>,
+    ) => {
+      state.selectedAnalyse = currentAnalyse;
+    },
   },
 });
 
-export const { addAnalyse, removeAnalyse } = analysesSlice.actions;
+export const { addAnalyse, removeAnalyse, setCurrentAnalyse } =
+  analysesSlice.actions;
 
-const store = configureStore({
+export const store = configureStore({
   reducer: analysesSlice.reducer,
 });
 

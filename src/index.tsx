@@ -3,16 +3,29 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
-import { WebAppProvider } from '@vkruglikov/react-telegram-web-app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AnalyseFormPage } from './pages/AnalyseFormPage';
+import { Provider } from 'react-redux';
+import { store } from './store';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+  },
+  {
+    path: '/analyze-form',
+    element: <AnalyseFormPage />,
+  },
+]);
 
 root.render(
-  <WebAppProvider>
-    <App />
-  </WebAppProvider>,
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
