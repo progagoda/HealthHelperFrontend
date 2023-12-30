@@ -7,6 +7,6 @@ export type TAnalyse = {
   date?: dayjs.Dayjs;
 };
 export type TAnalysesState = {
-  selectedAnalyses: TAnalyse[] | [];
+  selectedAnalyses: TAnalyse[];
   selectedAnalyse: TAnalyse;
 };

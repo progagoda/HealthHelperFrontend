@@ -49,11 +49,7 @@ export const AnalyseFormPage: FC = () => {
       <Form.Item label="Date: ">
         <DatePicker onChange={(value) => setDate(value)} />
       </Form.Item>
-      <div>
-        {value && date && (
-          <MainButton text={'Add to card'} onClick={() => submit()} />
-        )}
-      </div>
+      {value && date && <MainButton text={'Add to card'} onClick={submit} />}
       <BackButton onClick={goBack} />
     </div>
   );

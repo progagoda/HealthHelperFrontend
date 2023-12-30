@@ -13,7 +13,7 @@ const analysesSlice = createSlice({
   initialState,
   reducers: {
     addAnalyse: (state, { payload: addAnalyse }: PayloadAction<TAnalyse>) => {
-      _.concat(state.selectedAnalyses, addAnalyse);
+      state.selectedAnalyses.push(addAnalyse);
     },
     removeAnalyse: (
       state,

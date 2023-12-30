@@ -17,7 +17,6 @@ export const AnalyseCard = (analyse: TAnalyse) => {
   const removeSelectedAnalyse = (analyse: TAnalyse) => {
     dispatch(removeAnalyse(analyse));
   };
-  console.log(isSelected);
 
   const removeOrAddButton = (isSelected: boolean) => {
     if (isSelected)
