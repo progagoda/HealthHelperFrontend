@@ -8,7 +8,7 @@ export const AnalysesListPage = () => {
   return (
     <List
       size={'small'}
-      grid={{ column: 3 }}
+      grid={{ gutter: 1, column: 3 }}
       dataSource={ANALYZES}
       renderItem={(analyse: TAnalyse) => (
         <List.Item>

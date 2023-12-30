@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TAnalyse, TAnalysesState } from '../types';
+import { TAnalysesState } from '../types';
 import { DatePicker, Form, InputNumber, Typography } from 'antd';
 import { BackButton, MainButton } from '@vkruglikov/react-telegram-web-app';
 import { useNavigate } from 'react-router-dom';
@@ -20,14 +20,16 @@ export const AnalyseFormPage: FC = () => {
   const onChangeValue = (value: number | null) => {
     setValue(value);
   };
-  const goBack = () => navigate(-1);
-  const onFinish = (analyse: TAnalyse) => {
+  const goBack = () => {
+    navigate(-1);
+  };
+  const submit = () => {
     dispatch(
       addAnalyse({
         id: selectedAnalyse.id,
         name: selectedAnalyse.name,
-        value: analyse.value,
-        date: analyse.date,
+        value: value ?? 0,
+        date: date ?? undefined,
       }),
     );
     goBack();
@@ -37,7 +39,6 @@ export const AnalyseFormPage: FC = () => {
     <div style={{ marginLeft: 5 }}>
       <Title level={3}>{selectedAnalyse.name}</Title>
       <Form
-        onFinish={onFinish}
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
@@ -48,7 +49,11 @@ export const AnalyseFormPage: FC = () => {
       <Form.Item label="Date: ">
         <DatePicker onChange={(value) => setDate(value)} />
       </Form.Item>
-      <div>{value && date && <MainButton text={'Add to card'} />}</div>
+      <div>
+        {value && date && (
+          <MainButton text={'Add to card'} onClick={() => submit()} />
+        )}
+      </div>
       <BackButton onClick={goBack} />
     </div>
   );
