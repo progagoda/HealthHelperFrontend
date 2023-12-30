@@ -1,4 +1,4 @@
-import { Card, Typography } from 'antd';
+import { Card, Col, Typography } from 'antd';
 import { TAnalyse } from '../../types';
 import { StyledButtonAdd, StyledButtonRemove } from './styles';
 import { Link } from 'react-router-dom';
@@ -39,14 +39,17 @@ export const AnalyseCard = (analyse: TAnalyse) => {
       </Link>
     );
   };
+
   return (
-    <Card
-      key={analyse.id}
-      bordered={false}
-      size={'small'}
-      actions={[removeOrAddButton(isSelected)]}
-    >
-      <Text strong>{analyse.name}</Text>
-    </Card>
+    <Col span={20}>
+      <Card
+        key={analyse.id}
+        bordered={false}
+        size={'small'}
+        actions={[removeOrAddButton(isSelected)]}
+      >
+        <Text strong>{analyse.name}</Text>
+      </Card>
+    </Col>
   );
 };

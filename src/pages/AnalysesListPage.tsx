@@ -1,4 +1,4 @@
-import { List } from 'antd';
+import { List, Row } from 'antd';
 import { ANALYZES } from '../constants';
 import { TAnalyse } from '../types';
 import React from 'react';
@@ -8,12 +8,12 @@ export const AnalysesListPage = () => {
   return (
     <List
       size={'small'}
-      grid={{ gutter: 1, column: 3 }}
+      grid={{ column: 3 }}
       dataSource={ANALYZES}
       renderItem={(analyse: TAnalyse) => (
-        <List.Item>
+        <Row gutter={0}>
           <AnalyseCard id={analyse.id} name={analyse.name} />
-        </List.Item>
+        </Row>
       )}
     />
   );
