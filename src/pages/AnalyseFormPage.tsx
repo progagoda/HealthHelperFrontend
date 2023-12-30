@@ -20,7 +20,8 @@ export const AnalyseFormPage: FC = () => {
   const onChangeValue = (value: number | null) => {
     setValue(value);
   };
-  const onFinish = (analyse: TAnalyse) =>
+  const goBack = () => navigate(-1);
+  const onFinish = (analyse: TAnalyse) => {
     dispatch(
       addAnalyse({
         id: selectedAnalyse.id,
@@ -29,7 +30,8 @@ export const AnalyseFormPage: FC = () => {
         date: analyse.date,
       }),
     );
-  const goBack = () => navigate(-1);
+    goBack();
+  };
 
   return (
     <div style={{ marginLeft: 5 }}>

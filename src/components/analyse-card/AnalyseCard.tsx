@@ -1,32 +1,51 @@
 import { Card, Typography } from 'antd';
 import { TAnalyse } from '../../types';
-import { StyledButton } from './styles';
+import { StyledButtonAdd, StyledButtonRemove } from './styles';
 import { Link } from 'react-router-dom';
 import type { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
-import { setCurrentAnalyse } from '../../store';
+import { removeAnalyse, setCurrentAnalyse } from '../../store';
+import { useInTheCard } from '../../hooks/useInTheCard';
 
 const { Text } = Typography;
 export const AnalyseCard = (analyse: TAnalyse) => {
   const dispatch: Dispatch = useDispatch();
+  const isSelected = useInTheCard(analyse.id);
   const addCurrentAnalyse = (analyse: TAnalyse) => {
     dispatch(setCurrentAnalyse(analyse));
+  };
+  const removeSelectedAnalyse = (analyse: TAnalyse) => {
+    dispatch(removeAnalyse(analyse));
+  };
+  console.log(isSelected);
+
+  const removeOrAddButton = (isSelected: boolean) => {
+    if (isSelected)
+      return (
+        <StyledButtonRemove
+          type={'primary'}
+          onClick={() => removeSelectedAnalyse(analyse)}
+        >
+          REMOVE
+        </StyledButtonRemove>
+      );
+    return (
+      <Link to={'analyze-form'}>
+        <StyledButtonAdd
+          type={'primary'}
+          onClick={() => addCurrentAnalyse(analyse)}
+        >
+          ADD
+        </StyledButtonAdd>
+      </Link>
+    );
   };
   return (
     <Card
       key={analyse.id}
       bordered={false}
       size={'small'}
-      actions={[
-        <Link to={'analyze-form'}>
-          <StyledButton
-            type={'primary'}
-            onClick={() => addCurrentAnalyse(analyse)}
-          >
-            ADD
-          </StyledButton>
-        </Link>,
-      ]}
+      actions={[removeOrAddButton(isSelected)]}
     >
       <Text strong>{analyse.name}</Text>
     </Card>
