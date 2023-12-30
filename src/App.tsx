@@ -3,6 +3,8 @@ import './App.css';
 import { ConfigProvider, theme } from 'antd';
 import { useThemeParams } from '@vkruglikov/react-telegram-web-app';
 import { AnalysesListPage } from './pages/AnalysesListPage';
+import { Route, Routes } from 'react-router-dom';
+import { AnalyseFormPage } from './pages/AnalyseFormPage';
 
 export const App: FC = () => {
   const [colorScheme, themeParams] = useThemeParams();
@@ -24,7 +26,10 @@ export const App: FC = () => {
           : undefined
       }
     >
-      <AnalysesListPage />
+      <Routes>
+        <Route index element={<AnalysesListPage />} />
+        <Route path={'analyzes-form'} element={<AnalyseFormPage />} />
+      </Routes>
     </ConfigProvider>
   );
 };
