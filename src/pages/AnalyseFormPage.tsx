@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TAnalyse, TAnalysesState } from '../types';
 import { DatePicker, Form, InputNumber, Typography } from 'antd';
 import { BackButton, MainButton } from '@vkruglikov/react-telegram-web-app';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { addAnalyse } from '../store';
 
@@ -14,6 +15,7 @@ export const AnalyseFormPage: FC = () => {
   const [value, setValue] = useState<number | null>();
   const [date, setDate] = useState<dayjs.Dayjs | null>();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChangeValue = (value: number | null) => {
     setValue(value);
@@ -27,6 +29,7 @@ export const AnalyseFormPage: FC = () => {
         date: analyse.date,
       }),
     );
+  const goBack = () => navigate(-1);
 
   return (
     <div style={{ marginLeft: 5 }}>
@@ -44,7 +47,7 @@ export const AnalyseFormPage: FC = () => {
         <DatePicker onChange={(value) => setDate(value)} />
       </Form.Item>
       <div>{value && date && <MainButton text={'Add to card'} />}</div>
-      <BackButton />
+      <BackButton onClick={goBack} />
     </div>
   );
 };
