@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { TAnalysesState } from '../types';
+import { useDispatch } from 'react-redux';
 import {
+  Button,
   ConfigProvider,
   DatePicker,
   Form,
@@ -15,17 +15,15 @@ import {
   useThemeParams,
 } from '@vkruglikov/react-telegram-web-app';
 import { useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
 import { addAnalyse } from '../store';
+import { useSelectorAnalyse } from '../hooks/storeHooks';
 
 const { Title } = Typography;
 export const AnalyseFormPage: FC = () => {
   const [colorScheme, themeParams] = useThemeParams();
-  const selectedAnalyse = useSelector(
-    (state: TAnalysesState) => state.selectedAnalyse,
-  );
+  const selectedAnalyse = useSelectorAnalyse();
   const [value, setValue] = useState<number | null>();
-  const [date, setDate] = useState<dayjs.Dayjs | null>();
+  const [date, setDate] = useState<string | null>();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,6 +40,8 @@ export const AnalyseFormPage: FC = () => {
         name: selectedAnalyse.name,
         value: value ?? 0,
         date: date ?? undefined,
+        referenceMin: selectedAnalyse.referenceMin,
+        referenceMax: selectedAnalyse.referenceMax,
       }),
     );
     goBack();
@@ -76,8 +76,9 @@ export const AnalyseFormPage: FC = () => {
           <InputNumber onChange={onChangeValue} />
         </Form.Item>
         <Form.Item label="Date: ">
-          <DatePicker onChange={(value) => setDate(value)} />
+          <DatePicker onChange={(value, dateString) => setDate(dateString)} />
         </Form.Item>
+        <Button onClick={submit}>Submit</Button>
         {value && date && <MainButton text={'Add to card'} onClick={submit} />}
         <BackButton onClick={goBack} />
       </div>

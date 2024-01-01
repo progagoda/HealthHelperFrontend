@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/analyze-form',
+    path: '/analyse-form',
     element: <AnalyseFormPage />,
   },
 ]);

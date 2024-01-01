@@ -1,13 +1,16 @@
-import dayjs from 'dayjs';
-
 export type TAnalyse = {
   id: number;
   name: string;
-  image?: string;
+  referenceMin: number;
+  referenceMax: number;
   value?: number;
-  date?: dayjs.Dayjs;
+  date?: string;
 };
-export type TAnalysesState = {
-  selectedAnalyses: TAnalyse[];
+export type TAnalysisState = {
+  selectedAnalysis: TAnalyse[];
   selectedAnalyse: TAnalyse;
+};
+
+export type TAnalysisReducerState = {
+  analysesReducers: TAnalysisState;
 };

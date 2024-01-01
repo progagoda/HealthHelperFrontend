@@ -6,9 +6,13 @@ import type { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { removeAnalyse, setCurrentAnalyse } from '../../store';
 import { useInTheCard } from '../../hooks/useInTheCard';
+import { FC } from 'react';
 
 const { Text } = Typography;
-export const AnalyseCard = (analyse: TAnalyse) => {
+type TAnalyseCardProps = {
+  analyse: TAnalyse;
+};
+export const AnalyseCard: FC<TAnalyseCardProps> = ({ analyse }) => {
   const dispatch: Dispatch = useDispatch();
   const isSelected = useInTheCard(analyse.id);
   const addCurrentAnalyse = (analyse: TAnalyse) => {
@@ -29,7 +33,7 @@ export const AnalyseCard = (analyse: TAnalyse) => {
         </StyledButtonRemove>
       );
     return (
-      <Link to={'analyze-form'}>
+      <Link to={'analyse-form'}>
         <StyledButtonAdd
           type={'primary'}
           onClick={() => addCurrentAnalyse(analyse)}

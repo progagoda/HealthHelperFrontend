@@ -1,26 +1,32 @@
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import _ from 'lodash';
-import { TAnalyse, TAnalysesState } from './types';
+import { TAnalyse, TAnalysisState } from './types';
 import { ANALYZE } from './constants';
+import { analysisAPI } from './api';
 
-const initialState: TAnalysesState = {
-  selectedAnalyses: [],
+const initialState: TAnalysisState = {
+  selectedAnalysis: [],
   selectedAnalyse: ANALYZE,
 };
 
-const analysesSlice = createSlice({
+const analysisSlice = createSlice({
   name: 'analyses',
   initialState,
   reducers: {
     addAnalyse: (state, { payload: addAnalyse }: PayloadAction<TAnalyse>) => {
-      state.selectedAnalyses.push(addAnalyse);
+      state.selectedAnalysis.push(addAnalyse);
     },
     removeAnalyse: (
       state,
       { payload: deleteAnalyse }: PayloadAction<TAnalyse>,
     ) => {
       _.remove(
-        state.selectedAnalyses,
+        state.selectedAnalysis,
         (analyse) => analyse.id === deleteAnalyse.id,
       );
     },
@@ -32,12 +38,17 @@ const analysesSlice = createSlice({
     },
   },
 });
-
+const reducers = combineReducers({
+  analysesReducers: analysisSlice.reducer,
+  [analysisAPI.reducerPath]: analysisAPI.reducer,
+});
 export const { addAnalyse, removeAnalyse, setCurrentAnalyse } =
-  analysesSlice.actions;
+  analysisSlice.actions;
 
 export const store = configureStore({
-  reducer: analysesSlice.reducer,
+  reducer: reducers,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(analysisAPI.middleware),
 });
 
 // Can still subscribe to the store

@@ -1,11 +1,8 @@
-import { useSelector } from 'react-redux';
-import { TAnalysesState } from '../types';
 import _ from 'lodash';
+import { useSelectorAnalysis } from './storeHooks';
 
 export const useInTheCard = (id: number): boolean => {
-  const selectedAnalyses = useSelector(
-    (state: TAnalysesState) => state.selectedAnalyses,
-  );
-  const isSelected = _.find(selectedAnalyses, ['id', id]);
+  const selectedAnalysis = useSelectorAnalysis();
+  const isSelected = _.find(selectedAnalysis, ['id', id]);
   return !!isSelected;
 };
