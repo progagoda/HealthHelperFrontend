@@ -47,6 +47,7 @@ export const AnalyseCard: FC<TAnalyseCardProps> = ({ analyse }) => {
   return (
     <Col span={20}>
       <Card
+        style={{ whiteSpace: 'break-spaces' }}
         key={analyse.id}
         bordered={false}
         size={'small'}

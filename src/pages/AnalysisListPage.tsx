@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import { TAnalyse } from '../types';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import { AnalyseCard } from '../components/analyse-card/AnalyseCard';
 import { analysisAPI } from '../api';
 import { useSelectorAnalysis } from '../hooks/storeHooks';
@@ -12,17 +12,6 @@ export const AnalysisListPage = () => {
   const { data: analysis } = analysisAPI.useGetAnalysisDictionaryQuery('');
   const selectedAnalyses = useSelectorAnalysis();
   const { tg } = useTelegram();
-
-  const onSendData = useCallback(() => {
-    tg.sendData(JSON.stringify(selectedAnalyses));
-  }, [selectedAnalyses]);
-
-  useEffect(() => {
-    tg.onEvent('mainButtonClicked', onSendData);
-    return () => {
-      tg.offEvent('mainButtonClicked', onSendData);
-    };
-  }, [onSendData]);
 
   return (
     <>
@@ -36,7 +25,12 @@ export const AnalysisListPage = () => {
           </List.Item>
         )}
       />
-      {!_.isEmpty(selectedAnalyses) && <MainButton text={'Send'} />}
+      {!_.isEmpty(selectedAnalyses) && (
+        <MainButton
+          text={'Send'}
+          onClick={() => tg.sendData(JSON.stringify(selectedAnalyses))}
+        />
+      )}
     </>
   );
 };
