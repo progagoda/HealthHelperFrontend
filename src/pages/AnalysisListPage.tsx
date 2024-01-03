@@ -29,7 +29,7 @@ export const AnalysisListPage = () => {
       {!_.isEmpty(selectedAnalyses) && (
         <MainButton
           text={'Send'}
-          onClick={tg.sendData(JSON.stringify(selectedAnalyses))}
+          onClick={() => tg.sendData(JSON.stringify(selectedAnalyses))}
         />
       )}
     </>
