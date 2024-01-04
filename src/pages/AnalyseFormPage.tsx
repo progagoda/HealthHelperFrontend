@@ -69,6 +69,7 @@ export const AnalyseFormPage: FC = () => {
     >
       <div style={{ marginLeft: 5 }}>
         <Title level={3}>{selectedAnalyse.name}</Title>
+        {tg.user.id}
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
