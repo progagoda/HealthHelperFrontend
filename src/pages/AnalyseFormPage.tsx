@@ -23,7 +23,7 @@ const { Title } = Typography;
 export const AnalyseFormPage: FC = () => {
   const [colorScheme, themeParams] = useThemeParams();
   const selectedAnalyse = useSelectorAnalyse();
-  const userId = useTelegram().user.id;
+  const { user } = useTelegram();
   const [value, setValue] = useState<number | null>();
   const [date, setDate] = useState<string | null>();
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export const AnalyseFormPage: FC = () => {
       addAnalyse({
         id: selectedAnalyse.id,
         name: selectedAnalyse.name,
-        userId,
+        userId: user?.id,
         value: value ?? 0,
         date: date ?? undefined,
         analysisTypeId: selectedAnalyse.analysisTypeId,
@@ -69,7 +69,7 @@ export const AnalyseFormPage: FC = () => {
     >
       <div style={{ marginLeft: 5 }}>
         <Title level={3}>{selectedAnalyse.name}</Title>
-        ваш id ${userId}
+        ваш id ${user?.id}
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
