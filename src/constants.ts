@@ -19,4 +19,28 @@ export const ANALYSIS: TAnalyse[] = [
     name: 'Железо',
     value: 0,
   },
+  {
+    id: 3,
+    name: 'Глюкоза',
+    value: 0,
+    analysisTypeId: 3,
+  },
+  {
+    id: 4,
+    name: 'Альбумин',
+    value: 0,
+    analysisTypeId: 4,
+  },
+  {
+    id: 5,
+    name: 'Холестерин',
+    value: 0,
+    analysisTypeId: 5,
+  },
+  {
+    id: 6,
+    name: 'ТТГ',
+    value: 0,
+    analysisTypeId: 6,
+  },
 ];
