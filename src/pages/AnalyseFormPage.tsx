@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Button,
   ConfigProvider,
   DatePicker,
   Form,
@@ -77,7 +76,6 @@ export const AnalyseFormPage: FC = () => {
         <Form.Item label="Date: ">
           <DatePicker onChange={(value, dateString) => setDate(dateString)} />
         </Form.Item>
-        <Button onClick={submit}>Submit</Button>
         {value && date && <MainButton text={'Add to card'} onClick={submit} />}
         <BackButton onClick={goBack} />
       </div>
