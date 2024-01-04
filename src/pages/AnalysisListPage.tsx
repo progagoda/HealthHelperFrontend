@@ -11,8 +11,8 @@ export const AnalysisListPage = () => {
   const selectedAnalysis = useSelectorAnalysis();
   const { tg } = useTelegram();
   const sendData = () => {
-    const data = _.omit(selectedAnalysis, ['name']);
-    tg.sendData(data);
+    // const data = _.omit(selectedAnalysis, ['name']);
+    tg.sendData(selectedAnalysis);
   };
   return (
     <>
