@@ -10,12 +10,15 @@ import { ANALYSIS } from '../constants';
 export const AnalysisListPage = () => {
   const selectedAnalysis = useSelectorAnalysis();
   const { tg } = useTelegram();
-
+  const sendData = (analysis: TAnalyse[]) => {
+    const data = _.omit(analysis, ['name']);
+    tg.sendData(data);
+  };
   return (
     <>
       <List
         size={'small'}
-        grid={{ column: 3 }}
+        grid={{ column: 2 }}
         dataSource={ANALYSIS}
         renderItem={(analyse: TAnalyse) => (
           <List.Item>
@@ -24,10 +27,7 @@ export const AnalysisListPage = () => {
         )}
       />
       {!_.isEmpty(selectedAnalysis) && (
-        <MainButton
-          text={'Send'}
-          onClick={() => tg.sendData(selectedAnalysis)}
-        />
+        <MainButton text={'Send'} onClick={() => sendData(selectedAnalysis)} />
       )}
     </>
   );

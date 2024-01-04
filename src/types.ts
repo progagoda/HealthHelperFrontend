@@ -1,8 +1,7 @@
 export type TAnalyse = {
   id: number;
   name: string;
-  referenceMin: number;
-  referenceMax: number;
+  analysisTypeId: number;
   value?: number;
   date?: string;
 };
