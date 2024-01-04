@@ -2,6 +2,7 @@ export type TAnalyse = {
   id: number;
   name: string;
   analysisTypeId: number;
+  userId?: number;
   value?: number;
   date?: string;
 };
