@@ -40,8 +40,7 @@ export const AnalyseFormPage: FC = () => {
         name: selectedAnalyse.name,
         value: value ?? 0,
         date: date ?? undefined,
-        referenceMin: selectedAnalyse.referenceMin,
-        referenceMax: selectedAnalyse.referenceMax,
+        analysisTypeId: selectedAnalyse.analysisTypeId,
       }),
     );
     goBack();
