@@ -12,18 +12,18 @@ import {
 import {
   BackButton,
   MainButton,
-  useInitData,
   useThemeParams,
 } from '@vkruglikov/react-telegram-web-app';
 import { useNavigate } from 'react-router-dom';
 import { addAnalyse } from '../store';
 import { useSelectorAnalyse } from '../hooks/storeHooks';
+import { useTelegram } from '../hooks/useTelegram';
 
 const { Title } = Typography;
 export const AnalyseFormPage: FC = () => {
   const [colorScheme, themeParams] = useThemeParams();
   const selectedAnalyse = useSelectorAnalyse();
-  const [initDataUnsafe] = useInitData();
+  const userId = useTelegram().user.id;
   const [value, setValue] = useState<number | null>();
   const [date, setDate] = useState<string | null>();
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export const AnalyseFormPage: FC = () => {
       addAnalyse({
         id: selectedAnalyse.id,
         name: selectedAnalyse.name,
-        userId: initDataUnsafe?.user?.id,
+        userId,
         value: value ?? 0,
         date: date ?? undefined,
         analysisTypeId: selectedAnalyse.analysisTypeId,
@@ -69,7 +69,7 @@ export const AnalyseFormPage: FC = () => {
     >
       <div style={{ marginLeft: 5 }}>
         <Title level={3}>{selectedAnalyse.name}</Title>
-        {initDataUnsafe?.user?.id}
+        ваш id ${userId}
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
