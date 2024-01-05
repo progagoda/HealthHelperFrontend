@@ -1,4 +1,4 @@
-import { List } from 'antd';
+import { Flex, List } from 'antd';
 import { TAnalyse } from '../types';
 import { AnalyseCard } from '../components/analyse-card/AnalyseCard';
 import { useSelectorAnalysis } from '../hooks/storeHooks';
@@ -15,7 +15,7 @@ export const AnalysisListPage = () => {
     tg.sendData(selectedAnalysis);
   };
   return (
-    <>
+    <Flex justify={'center'} style={{ marginTop: 20 }}>
       <List
         size={'small'}
         grid={{ column: 2 }}
@@ -29,6 +29,6 @@ export const AnalysisListPage = () => {
       {!_.isEmpty(selectedAnalysis) && (
         <MainButton text={'Send'} onClick={() => sendData()} />
       )}
-    </>
+    </Flex>
   );
 };
